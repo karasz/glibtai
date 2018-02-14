@@ -14,7 +14,7 @@ func TestLsoffset(t *testing.T) {
 		x := time.Date(i, time.August, 1, 0, 0, 0, 0, time.UTC)
 		z := lsoffset(x)
 		if z != q {
-			t.Error("Offset for %v should be %d, not %d", x, q, z)
+			t.Errorf("Offset for %v should be %d, not %d", x, q, z)
 		}
 	}
 

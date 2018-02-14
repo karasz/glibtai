@@ -157,7 +157,7 @@ func TAIfromString(str string) (*TAI, error) {
 	return TAIUnpack(buf[:]), nil
 }
 
-// TAIfromString returns a TAIN struct from an ASCII TAIN representation
+// TAINfromString returns a TAIN struct from an ASCII TAIN representation
 func TAINfromString(str string) (*TAIN, error) {
 	if str[0] != '@' {
 		return &TAIN{}, fmt.Errorf("TAI representation  %s is not valid, it does not begin with an '@'", str)
