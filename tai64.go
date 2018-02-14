@@ -39,14 +39,14 @@ const TAINLength = 12
 
 // TAINow returns the current timestamp in TAI struct
 func TAINow() *TAI {
-	return &TAI{x: TAICONST + uint64(time.Now().Unix())}
+	return &TAI{x: TAICONST + lsoffset(time.Now()) + uint64(time.Now().Unix())}
 }
 
 // TAINNow returns the current timestamp in TAIN struct
 func TAINNow() *TAIN {
 	now := time.Now()
 	return &TAIN{
-		sec:  TAICONST + uint64(now.Unix()),
+		sec:  TAICONST + lsoffset(now) + uint64(now.Unix()),
 		nano: uint32(now.Nanosecond()),
 	}
 }
@@ -89,14 +89,14 @@ func TAINSub(a, b *TAIN) (time.Duration, error) {
 
 // TAITime returns a go time object from a TAI timestamp
 func TAITime(t *TAI) time.Time {
-	result := time.Unix(int64(t.x-TAICONST), 0)
-	return result.UTC()
+	tm := time.Unix(int64(t.x-TAICONST), 0).UTC()
+	return tm.Add(-time.Duration(lsoffset(tm)) * time.Second)
 }
 
 // TAINTime returns a go time object from a TAIN timestamp
 func TAINTime(t *TAIN) time.Time {
-	result := time.Unix(int64(t.sec-TAICONST), int64(t.nano))
-	return result.UTC()
+	tm := time.Unix(int64(t.sec-TAICONST), int64(t.nano)).UTC()
+	return tm.Add(-time.Duration(lsoffset(tm)) * time.Second)
 }
 
 // TAIPack packs a TAI timestamp into a byte array of size TAILength
