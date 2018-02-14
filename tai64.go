@@ -157,6 +157,11 @@ func TAIfromString(str string) (*TAI, error) {
 	return TAIUnpack(buf[:]), nil
 }
 
+//TAIfromTime returns a TAI struct from time.Time
+func TAIfromTime(t time.Time) *TAI {
+	return &TAI{x: TAICONST + lsoffset(t) + uint64(t.Unix())}
+}
+
 // TAINfromString returns a TAIN struct from an ASCII TAIN representation
 func TAINfromString(str string) (*TAIN, error) {
 	if str[0] != '@' {
@@ -169,4 +174,11 @@ func TAINfromString(str string) (*TAIN, error) {
 	}
 
 	return TAINUnpack(buf[:]), nil
+}
+
+//TAINfromTime returns a TAIN struct from time.Time
+func TAINfromTime(t time.Time) *TAIN {
+	return &TAIN{
+		sec:  TAICONST + lsoffset(t) + uint64(t.Unix()),
+		nano: uint32(t.Nanosecond())}
 }
