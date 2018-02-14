@@ -1,4 +1,4 @@
-#glibtai
+# glibtai
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/karasz/glibtai)](https://goreportcard.com/report/github.com/karasz/glibtai)
 [![Unlicensed](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://github.com/karasz/gnocco/blob/master/UNLICENSE)
