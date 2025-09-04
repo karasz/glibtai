@@ -12,18 +12,15 @@ import (
 	"time"
 )
 
-//1971-10-28 18:19:55 +0000 UTC		40000000036db755
-
 func TestConversion(t *testing.T) {
 	z, err := TAIfromString("@40000000036db755")
 	if err != nil {
 		t.Error(err)
 	}
 	tt := TAITime(z)
-	if tt != time.Date(1971, time.October, 28, 18, 19, 55, 0, time.UTC) {
+	if !tt.Equal(time.Date(1971, time.October, 28, 18, 19, 55, 0, time.UTC)) {
 		t.Error("Expected 1971-10-28 18:19:55 +0000 UTC, got ", tt)
 	}
-
 }
 
 func TestTAIfromTime(t *testing.T) {

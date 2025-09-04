@@ -1,14 +1,9 @@
-# Binaries for programs and plugins
-*.exe
-*.dll
-*.so
-*.dylib
-
-# Test binary, build with `go test -c`
+# Coverage files (legacy location - now in .tmp/coverage/)
+coverage.out
+coverage.html
+.coverage/
+# Test files
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
-.glide/
+# Build and temporary files
+.tmp
+*.test

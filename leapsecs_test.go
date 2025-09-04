@@ -17,5 +17,4 @@ func TestLsoffset(t *testing.T) {
 			t.Errorf("Offset for %v should be %d, not %d", x, q, z)
 		}
 	}
-
 }

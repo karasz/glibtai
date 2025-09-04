@@ -3,7 +3,7 @@
 // released into the public domain.
 // For more information, please refer to <http://unlicense.org/>
 
-// +build linux,amd64
+//go:build linux && amd64
 
 // Package glibtai is a partial Go implementation of libtai. See
 // http://cr.yp.to/libtai/ for more information.
@@ -51,12 +51,12 @@ func TAINNow() TAIN {
 	}
 }
 
-//TAIAdd  adds a time.Duration to a TAI timestamp
+// TAIAdd  adds a time.Duration to a TAI timestamp
 func TAIAdd(a TAI, b time.Duration) TAI {
 	return TAI{x: a.x + uint64(b.Seconds())}
 }
 
-//TAINAdd adds a time.Duration to a TAIN timestamp
+// TAINAdd adds a time.Duration to a TAIN timestamp
 func TAINAdd(a TAIN, b time.Duration) TAIN {
 	var result TAIN
 	result.sec = a.sec + uint64(b.Seconds())
@@ -157,7 +157,7 @@ func TAIfromString(str string) (TAI, error) {
 	return TAIUnpack(buf[:]), nil
 }
 
-//TAIfromTime returns a TAI struct from time.Time
+// TAIfromTime returns a TAI struct from time.Time
 func TAIfromTime(t time.Time) TAI {
 	return TAI{x: TAICONST + lsoffset(t) + uint64(t.Unix())}
 }
@@ -176,7 +176,7 @@ func TAINfromString(str string) (TAIN, error) {
 	return TAINUnpack(buf[:]), nil
 }
 
-//TAINfromTime returns a TAIN struct from time.Time
+// TAINfromTime returns a TAIN struct from time.Time
 func TAINfromTime(t time.Time) TAIN {
 	return TAIN{
 		sec:  TAICONST + lsoffset(t) + uint64(t.Unix()),
