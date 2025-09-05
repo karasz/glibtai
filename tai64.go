@@ -3,7 +3,6 @@
 // released into the public domain.
 // For more information, please refer to <http://unlicense.org/>
 
-//go:build linux && amd64
 
 // Package glibtai is a partial Go implementation of libtai. See
 // http://cr.yp.to/libtai/ for more information.
