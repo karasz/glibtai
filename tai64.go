@@ -26,7 +26,11 @@ func TAINow() TAI {
 
 // TAIAdd adds a time.Duration to a TAI timestamp
 func TAIAdd(a TAI, b time.Duration) TAI {
-	return TAI{x: a.x + uint64(b.Seconds())}
+	seconds := int64(b / time.Second)
+	if seconds >= 0 {
+		return TAI{x: a.x + uint64(seconds)}
+	}
+	return TAI{x: a.x - uint64(-seconds)}
 }
 
 // TAISub subtracts two TAI timestamps

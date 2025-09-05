@@ -30,7 +30,7 @@ func BenchmarkTAISub(b *testing.B) {
 	tai2 := TAIAdd(tai1, time.Hour)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		TAISub(tai2, tai1)
+		_, _ = TAISub(tai2, tai1)
 	}
 }
 
@@ -72,7 +72,7 @@ func BenchmarkTAIfromString(b *testing.B) {
 	str := tai.String()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		TAIfromString(str)
+		_, _ = TAIfromString(str)
 	}
 }
 
@@ -104,7 +104,7 @@ func BenchmarkTAINSub(b *testing.B) {
 	tain2 := TAINAdd(tain1, time.Hour)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		TAINSub(tain2, tain1)
+		_, _ = TAINSub(tain2, tain1)
 	}
 }
 
@@ -146,7 +146,7 @@ func BenchmarkTAINfromString(b *testing.B) {
 	str := tain.String()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		TAINfromString(str)
+		_, _ = TAINfromString(str)
 	}
 }
 

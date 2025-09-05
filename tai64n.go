@@ -31,13 +31,35 @@ func TAINNow() TAIN {
 
 // TAINAdd adds a time.Duration to a TAIN timestamp
 func TAINAdd(a TAIN, b time.Duration) TAIN {
+	totalNanos := int64(b)
+
+	addSecs := totalNanos / 1e9
+	addNanos := totalNanos % 1e9
+
 	var result TAIN
-	result.sec = a.sec + uint64(b.Seconds())
-	result.nano = a.nano + uint32(b.Nanoseconds()-int64(b.Seconds())*1000000000)
-	if result.nano > 999999999 {
-		result.sec++
-		result.nano -= 1000000000
+
+	if addSecs >= 0 && addNanos >= 0 {
+		// Positive duration
+		result.sec = a.sec + uint64(addSecs)
+		newNanos := int64(a.nano) + addNanos
+		if newNanos >= 1e9 {
+			result.sec++
+			result.nano = uint32(newNanos - 1e9)
+		} else {
+			result.nano = uint32(newNanos)
+		}
+	} else {
+		// Negative duration - handle underflow
+		result.sec = a.sec - uint64(-addSecs)
+		newNanos := int64(a.nano) + addNanos // addNanos is negative
+		if newNanos < 0 {
+			result.sec-- // Will wrap around if underflows
+			result.nano = uint32(newNanos + 1e9)
+		} else {
+			result.nano = uint32(newNanos)
+		}
 	}
+
 	return result
 }
 
