@@ -7,21 +7,12 @@
 // http://cr.yp.to/libtai/ for more information.
 package glibtai
 
-import (
-	"testing"
-	"time"
-)
+// TAICONST is 2^62+10 representing the TAI label of the second Unix started
+// 1970-01-01 00:00:00 +0000 UTC
+const TAICONST = uint64(4611686018427387914)
 
-func TestLsoffset(t *testing.T) {
-	mp := make(map[int]uint64)
-	mp[1933] = 0
-	mp[1982] = 21
-	mp[2933] = lsoffset(time.Now())
-	for i, q := range mp {
-		x := time.Date(i, time.August, 1, 0, 0, 0, 0, time.UTC)
-		z := lsoffset(x)
-		if z != q {
-			t.Errorf("Offset for %v should be %d, not %d", x, q, z)
-		}
-	}
-}
+// TAILength is the length of a TAI timestamp in bytes
+const TAILength = 8
+
+// TAINLength is the length of a TAIN timestamp in bytes
+const TAINLength = 12

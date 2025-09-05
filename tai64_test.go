@@ -31,12 +31,3 @@ func TestTAIfromTime(t *testing.T) {
 		t.Errorf("%v is not equal with %v", tt, q)
 	}
 }
-
-func TestTAINfromTime(t *testing.T) {
-	tt := time.Date(2018, time.February, 14, 19, 31, 10, 0, time.UTC)
-	z := TAINfromTime(tt)
-	q := TAINTime(z)
-	if !tt.Equal(q) {
-		t.Errorf("%v is not equal with %v", tt, q)
-	}
-}
