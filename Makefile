@@ -1,5 +1,5 @@
 .PHONY: all clean generate fmt tidy check-grammar check-spelling check-shell check-jq
-.PHONY: coverage codecov clean-coverage race
+.PHONY: coverage codecov clean-coverage race bench
 .PHONY: FORCE
 
 GO ?= go
@@ -161,6 +161,9 @@ generate: ; $(info $(M) running go:generate…)
 # data to Codecov with proper module flags
 codecov: $(COVERAGE_DIR)/coverage.out ; $(info $(M) preparing codecov data)
 	$Q $(TOOLSDIR)/make_codecov.sh $(TMPDIR)/index $(COVERAGE_DIR)
+
+bench: ; $(info $(M) running benchmarks…)
+	$Q $(GO) test -bench=. -benchmem
 
 check-jq: FORCE
 	$Q $(JQ) --version >/dev/null 2>&1 || { \
