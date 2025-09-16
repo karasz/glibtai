@@ -255,6 +255,49 @@ make test                    # Full test suite
 
 [tai-wiki]: https://en.wikipedia.org/wiki/International_Atomic_Time
 
+## TODO
+
+The following API functions from the original DJB libtai implementation are not yet implemented in this Go port:
+
+### High-Precision Time (TAIA - TAI64NA)
+- **TAIA support**: TAI64NA (1-attosecond precision) time format and operations
+  - `taia_now()` - Get current time with attosecond precision
+  - `taia_add()`, `taia_sub()` - Arithmetic operations for TAIA
+  - `taia_pack()`, `taia_unpack()` - Serialization for 16-byte TAIA format
+  - `taia_less()` - Comparison operations
+  - `taia_half()` - Divide time by 2
+  - `taia_approx()` - Convert to floating-point approximation
+  - `taia_frac()` - Extract fractional part
+  - `taia_fmtfrac()` - Format fractional seconds
+
+### Calendar Date Operations (caldate)
+- **Calendar date handling**: Year-month-day operations and conversions
+  - `caldate_frommjd()` - Convert from Modified Julian Day number
+  - `caldate_mjd()` - Convert to Modified Julian Day number
+  - `caldate_normalize()` - Normalize invalid dates (e.g., Feb 30 → Mar 2)
+  - `caldate_fmt()`, `caldate_scan()` - String formatting and parsing
+  - `caldate_easter()` - Calculate Easter date for given year
+
+### Calendar Time Operations (caltime)
+- **Calendar time with timezone**: Complete date/time with UTC offset
+  - `caltime_tai()` - Convert from TAI to calendar time in UTC
+  - `caltime_utc()` - Convert from calendar time to TAI
+  - `caltime_fmt()`, `caltime_scan()` - String formatting and parsing
+
+### Leap Second Management (leapsecs)
+- **Advanced leap second handling**: Beyond the current basic implementation
+  - `leapsecs_init()` - Initialize leap second table
+  - `leapsecs_read()` - Read leap second data from file
+  - `leapsecs_add()` - Add leap seconds to TAI time
+  - `leapsecs_sub()` - Subtract leap seconds from TAI time
+
+### Missing Comparison and Utility Functions
+- **TAI64/TAI64N comparisons**: `tai_less()`, `tain_less()` for time ordering
+- **Validation functions**: Input validation for packed formats
+- **Extended arithmetic**: More comprehensive overflow handling
+
+**Priority**: Calendar operations (caldate/caltime) would provide the most value for general-purpose time handling, followed by TAIA support for ultra-high-precision applications.
+
 ## License
 
 This software is released into the public domain. See [UNLICENSE](UNLICENSE)
